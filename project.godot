@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Project Template"
+config/name="03-Juicy-Brick-Breaker"
 config/icon="res://icon.png"
 
 [rendering]
