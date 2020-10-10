@@ -12,13 +12,13 @@ export var fall_speed = 1.0
 var dying = false
 
 var colors = [
-	Color8(232,89,12)		#Starts with Orange 8
-	,Color8(247,103,7)		
-	,Color8(253,126,20)	
-	,Color8(255,146,43)		
-	,Color8(255,169,77)		
-	,Color8(255,192,120)		
-	,Color8(255,216,168)		#Ends with Orange 2
+	Color8(201,42,42)		#Starts with Red 9
+	,Color8(224,49,49)		
+	,Color8(240,62,62)		
+	,Color8(250,82,82)	
+	,Color8(255,107,107)		
+	,Color8(255,135,135)		
+	,Color8(255,168,168)			#Ends with Red 3
 ]
 onready var textures = load("res://Assets/Coin.png")
 

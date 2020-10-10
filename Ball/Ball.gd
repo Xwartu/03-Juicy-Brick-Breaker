@@ -4,7 +4,7 @@ export var max_speed = 400.0
 export var min_speed = 100.0
 onready var NeedBool = true
 onready var camera = get_node("/root/Game/Camera")
-
+onready var Lives = get_node("/root/Game/Ball/")
 onready var HUD = get_node("/root/Game/HUD")
 
 onready var effect_paddle = get_node("/root/Game/Sound_Effects/Paddle_Sound")
@@ -42,15 +42,16 @@ func play_sound(sound):
 	if NeedBool:
 		sound.play()
 
-#func _on_HUD_changed():
-	#update_color()	
 
 func _physics_process(_delta):
-	#if HUD.ball_trail:
 	var c = $Color.duplicate()
 	c.rect_global_position = global_position
 	c.color = c.color.darkened(0.4)
 	get_node("/root/Game/Trail").add_child(c)
+	if global_position.y > 778:
+		queue_free()
+		HUD.update_lives(-1)
+		Lives.create_ball()
 
 
 	var bodies = get_colliding_bodies()
@@ -78,3 +79,5 @@ func _integrate_forces(state):
 		state.linear_velocity.y = sign(state.linear_velocity.y) * min_speed
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
+		
+	

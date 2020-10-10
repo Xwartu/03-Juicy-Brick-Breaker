@@ -13,7 +13,7 @@ onready var textures = load("res://Assets/Coin.png")
 
 onready var target_y = position.y
 
-var color = Color8(252,196,25) #Yellow 5
+var color = Color8(116,201,30) #Lime 7
 var color_s = color.s
 
 func _ready():

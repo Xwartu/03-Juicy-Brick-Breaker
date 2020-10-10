@@ -23,7 +23,7 @@ func start_ball():
 		ch.queue_free()
 	c = countdown
 	Cdown.show()
-	Cdown.text = "Level 1"
+	Cdown.text = "Level 2"
 	timer.start()
 
 func create_ball():
@@ -37,7 +37,7 @@ func create_ball():
 func _on_Timer_timeout():
 	c -= 1
 	if c > 0:
-		Cdown.text = "Level 1"
+		Cdown.text = "Level 2"
 	else:
 		Cdown.text = ""
 		Cdown.hide()

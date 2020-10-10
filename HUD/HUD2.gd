@@ -10,13 +10,13 @@ func _ready():
 	
 
 func _on_Score_high():
-	get_tree().change_scene("res://Levels/Level2.tscn")
+	get_tree().change_scene("res://Menu/Win.tscn")
 
 
 func update_score(s):
 	global.score += s
 	$Score.text = "Score: " + str(global.score)
-	if global.score >= 560:
+	if global.score >= 1120:
 		_on_Score_high()
 		
 func update_lives(l):
