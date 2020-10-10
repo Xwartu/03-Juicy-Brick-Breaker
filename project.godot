@@ -16,8 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="03-Juicy-Brick-Breaker"
-run/main_scene="res://Start/Start Screen.tscn"
+run/main_scene="res://Menu/Start Screen.tscn"
 config/icon="res://Assets/Icons/musicOn.png"
+
+[autoload]
+
+Global="*res://Global.gd"
+
+[display]
+
+window/size/height=768
 
 [input]
 

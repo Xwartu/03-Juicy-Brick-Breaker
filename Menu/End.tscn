@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Audio/Ending.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Icons/right.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Icons/power.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Fonts/Kenney Mini Square.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Menu/Start Screen.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 4 )
+
+[node name="Start Screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 768.0
+color = Color( 0.447059, 0.101961, 0.0745098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quitback" type="ColorRect" parent="."]
+margin_left = 352.0
+margin_top = 550.0
+margin_right = 652.0
+margin_bottom = 674.0
+color = Color( 0.188235, 0.596078, 0.952941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Playback" type="ColorRect" parent="."]
+margin_left = 352.0
+margin_top = 400.0
+margin_right = 652.0
+margin_bottom = 524.0
+color = Color( 0.941176, 0.494118, 0.0156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 47.0
+margin_right = 1024.0
+margin_bottom = 362.0
+custom_fonts/font = SubResource( 1 )
+text = "You failed!
+Try again?"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+margin_left = 362.0
+margin_top = 410.0
+margin_right = 642.0
+margin_bottom = 516.0
+custom_fonts/font = SubResource( 2 )
+text = "replay"
+icon = ExtResource( 2 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 362.0
+margin_top = 560.0
+margin_right = 642.0
+margin_bottom = 666.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+text = "Quit"
+icon = ExtResource( 3 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

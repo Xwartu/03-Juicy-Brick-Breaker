@@ -1,20 +1,171 @@
-[gd_scene format=2]
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Audio/wall.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Audio/brick.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Audio/paddle.wav" type="AudioStream" id=4]
+[ext_resource path="res://Background.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Audio/Track 1 - Level 0.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Audio/Track 2 Level 2.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Brick/Bricks.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Icons/musicOff.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Icons/musicOn.png" type="Texture" id=10]
+[ext_resource path="res://Sound/Background Music.gd" type="Script" id=11]
+[ext_resource path="res://Walls/Wall.gd" type="Script" id=12]
+[ext_resource path="res://Ball/Trail.gd" type="Script" id=13]
+[ext_resource path="res://Ball/Ball_Loader.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Fonts/Kenney Pixel Square.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 516.321, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 390.064 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 389.276 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 15 )
 
 [node name="Game" type="Node2D"]
 
-[node name="Wall" type="StaticBody2D" parent="."]
-
-[node name="Game HUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 768.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
+[node name="Tween" type="Tween" parent="Background"]
 
-[node name="Paddle Sound" type="AudioStreamPlayer" parent="."]
+[node name="Timer" type="Timer" parent="Background"]
+autostart = true
 
-[node name="Brick Sound" type="AudioStreamPlayer" parent="."]
+[node name="Wall" type="StaticBody2D" parent="."]
+script = ExtResource( 12 )
 
-[node name="Wall Sound" type="AudioStreamPlayer" parent="."]
+[node name="Particles2D" type="Particles2D" parent="Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 512, -10 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2( -10, 384 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 1034, 384 )
+shape = SubResource( 3 )
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicON" type="Button" parent="HUD"]
+anchor_top = -0.0198425
+anchor_bottom = -0.0198425
+margin_left = 910.0
+margin_top = 715.794
+margin_right = 1022.0
+margin_bottom = 821.794
+rect_scale = Vector2( 0.5, 0.5 )
+icon = ExtResource( 10 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicOff" type="Button" parent="HUD"]
+margin_left = 968.0
+margin_top = 715.0
+margin_right = 1080.0
+margin_bottom = 821.0
+rect_scale = Vector2( 0.5, 0.5 )
+icon = ExtResource( 9 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Lives" type="Label" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+margin_right = 220.0
+margin_bottom = 45.0
+color = Color( 0.290196, 0.290196, 0.290196, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="HUD"]
+margin_left = 804.0
+margin_right = 1024.0
+margin_bottom = 45.0
+color = Color( 0.290196, 0.290196, 0.290196, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundMusic" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Track 1" type="AudioStreamPlayer" parent="BackgroundMusic"]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="Track 2" type="AudioStreamPlayer" parent="BackgroundMusic"]
+stream = ExtResource( 7 )
+
+[node name="Sound Effects" type="Node2D" parent="."]
+
+[node name="Wall Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+stream = ExtResource( 2 )
+
+[node name="Paddle Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+stream = ExtResource( 4 )
+
+[node name="Brick Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+stream = ExtResource( 3 )
+
+[node name="Bricks" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Signifier" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="Signifier"]
+
+[node name="Level" type="Label" parent="Signifier"]
+margin_right = 1024.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 4 )
+text = "Level 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Trail" type="Node2D" parent="."]
+script = ExtResource( 13 )
+
+[node name="Ball" type="Node2D" parent="."]
+script = ExtResource( 14 )
+[connection signal="timeout" from="Background/Timer" to="Background" method="_on_Timer_timeout"]
+[connection signal="pressed" from="HUD/MusicON" to="HUD" method="_on_MusicON_pressed"]
+[connection signal="pressed" from="HUD/MusicOff" to="HUD" method="_on_MusicOff_pressed"]
+[connection signal="timeout" from="Signifier/Timer" to="Ball" method="_on_Timer_timeout"]
