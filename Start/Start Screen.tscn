@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Icons/right.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Icons/power.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Fonts/Kenney Mini Square.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Start/Start Screen.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 3 )
+
+[node name="Start Screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.113725, 0.121569, 0.160784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quitback" type="ColorRect" parent="."]
+margin_left = 382.0
+margin_top = 420.0
+margin_right = 642.0
+margin_bottom = 544.0
+color = Color( 0.415686, 0.027451, 0.027451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Playback" type="ColorRect" parent="."]
+margin_left = 382.0
+margin_top = 280.0
+margin_right = 642.0
+margin_bottom = 404.0
+color = Color( 0.321569, 0.823529, 0.219608, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 300.0
+custom_fonts/font = SubResource( 1 )
+text = "Welcome to C220 BricK Breaker!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+margin_left = 392.0
+margin_top = 290.0
+margin_right = 632.0
+margin_bottom = 396.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+icon = ExtResource( 1 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 392.0
+margin_top = 430.0
+margin_right = 632.0
+margin_bottom = 536.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+text = "Quit"
+icon = ExtResource( 2 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

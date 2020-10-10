@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="Game" type="Node2D"]
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="Game HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Paddle Sound" type="AudioStreamPlayer" parent="."]
+
+[node name="Brick Sound" type="AudioStreamPlayer" parent="."]
+
+[node name="Wall Sound" type="AudioStreamPlayer" parent="."]
