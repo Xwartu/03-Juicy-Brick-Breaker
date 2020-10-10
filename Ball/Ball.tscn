@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Ball.png" type="Texture" id=1]
 [ext_resource path="res://Ball/Ball.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="Gradient" id=1]
 
@@ -45,11 +49,16 @@ hue_variation_curve = SubResource( 4 )
 extents = Vector2( 7.52487, 7.52791 )
 
 [node name="Ball" type="RigidBody2D"]
+mode = 2
+physics_material_override = SubResource( 9 )
+gravity_scale = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 7, 7 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.2, 0.2 )
 amount = 5
 lifetime = 0.5
 process_material = SubResource( 7 )

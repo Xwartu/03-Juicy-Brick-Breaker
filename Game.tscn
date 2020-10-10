@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/wall.wav" type="AudioStream" id=2]
@@ -15,6 +15,48 @@
 [ext_resource path="res://Ball/Trail.gd" type="Script" id=13]
 [ext_resource path="res://Ball/Ball_Loader.gd" type="Script" id=14]
 [ext_resource path="res://Assets/Fonts/Kenney Pixel Square.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Camera/Camera.gd" type="Script" id=16]
+[ext_resource path="res://Paddle/Paddle.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Smoke0.png" type="Texture" id=18]
+[ext_resource path="res://Sound/Track 3.gd" type="Script" id=19]
+[ext_resource path="res://Sound/Track 2.gd" type="Script" id=20]
+
+[sub_resource type="Gradient" id=7]
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+min_value = -1.0
+_data = [ Vector2( 0.0117647, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.505882, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, -1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 300.0
+linear_accel_random = 1.0
+radial_accel = 100.0
+radial_accel_random = 1.0
+scale = 0.25
+scale_random = 0.5
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 8 )
+hue_variation = 0.1
+hue_variation_random = 0.5
+hue_variation_curve = SubResource( 10 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 516.321, 10 )
@@ -25,9 +67,16 @@ extents = Vector2( 10, 390.064 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 389.276 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 15 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 30
 font_data = ExtResource( 15 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 50.0078, 10 )
 
 [node name="Game" type="Node2D"]
 
@@ -45,20 +94,25 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="Background"]
 autostart = true
 
-[node name="Wall" type="StaticBody2D" parent="."]
+[node name="Walls" type="StaticBody2D" parent="."]
 script = ExtResource( 12 )
 
-[node name="Particles2D" type="Particles2D" parent="Wall"]
+[node name="Particles2D" type="Particles2D" parent="Walls"]
+emitting = false
+lifetime = 0.4
+one_shot = true
+process_material = SubResource( 13 )
+texture = ExtResource( 18 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+[node name="Top" type="CollisionShape2D" parent="Walls"]
 position = Vector2( 512, -10 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+[node name="Left" type="CollisionShape2D" parent="Walls"]
 position = Vector2( -10, 384 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+[node name="Right" type="CollisionShape2D" parent="Walls"]
 position = Vector2( 1034, 384 )
 shape = SubResource( 3 )
 
@@ -96,16 +150,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score" type="Label" parent="HUD"]
-margin_right = 40.0
-margin_bottom = 14.0
-
-[node name="Lives" type="Label" parent="HUD"]
-margin_right = 40.0
-margin_bottom = 14.0
-
 [node name="ColorRect" type="ColorRect" parent="HUD"]
-margin_right = 220.0
+margin_right = 140.0
 margin_bottom = 45.0
 color = Color( 0.290196, 0.290196, 0.290196, 0.784314 )
 __meta__ = {
@@ -113,7 +159,7 @@ __meta__ = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="HUD"]
-margin_left = 804.0
+margin_left = 884.0
 margin_right = 1024.0
 margin_bottom = 45.0
 color = Color( 0.290196, 0.290196, 0.290196, 0.784314 )
@@ -121,25 +167,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Lives" type="Label" parent="HUD"]
+margin_left = 10.0
+margin_right = 210.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 5 )
+text = "Lives:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 820.0
+margin_right = 1020.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 5 )
+text = "Score:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BackgroundMusic" type="Node2D" parent="."]
-script = ExtResource( 11 )
 
 [node name="Track 1" type="AudioStreamPlayer" parent="BackgroundMusic"]
 stream = ExtResource( 6 )
-autoplay = true
+script = ExtResource( 11 )
+
+[node name="Track 3" type="AudioStreamPlayer" parent="BackgroundMusic"]
+stream = ExtResource( 6 )
+script = ExtResource( 19 )
 
 [node name="Track 2" type="AudioStreamPlayer" parent="BackgroundMusic"]
 stream = ExtResource( 7 )
+script = ExtResource( 20 )
 
-[node name="Sound Effects" type="Node2D" parent="."]
+[node name="Sound_Effects" type="Node2D" parent="."]
 
-[node name="Wall Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+[node name="Wall_Sound" type="AudioStreamPlayer" parent="Sound_Effects"]
 stream = ExtResource( 2 )
 
-[node name="Paddle Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+[node name="Paddle_Sound" type="AudioStreamPlayer" parent="Sound_Effects"]
 stream = ExtResource( 4 )
 
-[node name="Brick Sound" type="AudioStreamPlayer" parent="Sound Effects"]
+[node name="Brick_Sound" type="AudioStreamPlayer" parent="Sound_Effects"]
 stream = ExtResource( 3 )
 
 [node name="Bricks" type="Node2D" parent="."]
@@ -165,7 +238,39 @@ script = ExtResource( 13 )
 
 [node name="Ball" type="Node2D" parent="."]
 script = ExtResource( 14 )
+
+[node name="BigPaddle" type="Node2D" parent="."]
+
+[node name="Paddle" type="KinematicBody2D" parent="BigPaddle"]
+position = Vector2( 512, 700 )
+script = ExtResource( 17 )
+
+[node name="Color" type="ColorRect" parent="BigPaddle/Paddle"]
+margin_left = -50.0
+margin_right = 50.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigPaddle/Paddle"]
+position = Vector2( 0, 10 )
+shape = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="BigPaddle/Paddle"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 512, 384 )
+current = true
+script = ExtResource( 16 )
 [connection signal="timeout" from="Background/Timer" to="Background" method="_on_Timer_timeout"]
 [connection signal="pressed" from="HUD/MusicON" to="HUD" method="_on_MusicON_pressed"]
 [connection signal="pressed" from="HUD/MusicOff" to="HUD" method="_on_MusicOff_pressed"]
+[connection signal="finished" from="BackgroundMusic/Track 1" to="BackgroundMusic" method="_on_Track_1_finished"]
+[connection signal="finished" from="BackgroundMusic/Track 1" to="BackgroundMusic/Track 1" method="_on_Track_1_finished"]
+[connection signal="finished" from="BackgroundMusic/Track 3" to="BackgroundMusic" method="_on_Track_1_finished"]
+[connection signal="finished" from="BackgroundMusic/Track 3" to="BackgroundMusic/Track 1" method="_on_Track_3_finished"]
+[connection signal="ready" from="BackgroundMusic/Track 3" to="BackgroundMusic/Track 1" method="_on_Track_3_ready"]
+[connection signal="finished" from="BackgroundMusic/Track 2" to="BackgroundMusic/Track 1" method="_on_Track_2_finished"]
+[connection signal="ready" from="BackgroundMusic/Track 2" to="BackgroundMusic/Track 1" method="_on_Track_2_ready"]
 [connection signal="timeout" from="Signifier/Timer" to="Ball" method="_on_Timer_timeout"]
