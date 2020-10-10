@@ -2,7 +2,8 @@
 C220 Brick Breaker clone project that we are trying to make juicy
 
 Thanks to kenny.nl for font.
-#Implementation
+
+# Implementation
 
 # Reference:
 Intro and End Music respectively:
@@ -21,5 +22,5 @@ All sampled from this soundtrack
 Sound Effects:
 By me
 
-#Created By:
+# Created By:
 Joshua Tonner
