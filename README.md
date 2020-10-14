@@ -17,7 +17,7 @@ https://freemusicarchive.org/music/Komiku/Captain_Glouglous_Incredible_Week_Soun
 
 https://freemusicarchive.org/music/Komiku/Poupis_incredible_adventures_/Komiku_-_Poupis_incredible_adventures__-_70_Ending
 
-There's copyright linking requirement for the music, but credit where credit is due.
+There's no copyright linking requirement for the music, but credit where credit is due.
 
 Level Music:
 
