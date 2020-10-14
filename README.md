@@ -32,6 +32,7 @@ All sampled from this soundtrack
 
 # Reference:
 
+I don't really know what this section is for to clarify about how I forgot to push changes back on Saturday that I brought up Tuesday the 13th it seems it recognized that it was indeed 3 days ago, which is good. I did the readme on github though so I had to resolve a conflict between my two versions, and add in a message.
 
 
 # Created By:
