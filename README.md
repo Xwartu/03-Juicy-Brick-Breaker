@@ -25,6 +25,8 @@ Level 1: https://freemusicarchive.org/music/Monplaisir/Turbo_Rallye_Clicker_4000
 
 Level 2: https://freemusicarchive.org/music/Monplaisir/Turbo_Rallye_Clicker_4000_Soundtrack/Monplaisir_-_Turbo_Rallye_Clicker_4000_Soundtrack_-_05_Level_2
 
+The Win screen music is from the same artist: https://freemusicarchive.org/music/Monplaisir/Turbo_Rallye_Clicker_4000_Soundtrack/Monplaisir_-_Turbo_Rallye_Clicker_4000_Soundtrack_-_07_Level_4
+
 Sound Effects:
 By myself using Audacity
 
